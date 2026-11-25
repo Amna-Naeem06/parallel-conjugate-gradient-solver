@@ -1,55 +1,83 @@
 
 # Parallel Conjugate Gradient Solver
 
-A Parallel and Distributed Computing (CS426) project at Air University, Islamabad.
-
 ## Project Overview
 
-This project implements a Conjugate Gradient (CG) solver to calculate steady-state temperature distribution across a 2D metal plate using the 5-point finite difference discretization of the Poisson equation.
+A matrix-free Conjugate Gradient solver for
+calculating steady-state temperature distribution
+across a two-dimensional metal plate.
 
-## Implementations
+Course: CS426 - Parallel and Distributed Computing
 
-- Sequential C++ baseline
-- OpenMP parallel implementation
-- MPI distributed implementation
-- Hybrid MPI + OpenMP implementation
-- CUDA GPU implementation
+## Phase 1: Sequential Baseline
 
-## Team Members
+Implementation: C++
 
-| Name | Roll Number | Role |
-|---|---|---|
-| Amna Naeem | 241550 | Team Lead |
-| Ayesha Azhar | 241522 | Member |
-| Aryan Tariq | 241552 | Member |
+Numerical Method: Conjugate Gradient
 
-## Technologies
+Discretization: Five-Point Finite Difference Stencil
 
-- C++
+Matrix Storage: Matrix-Free
+
+Tolerance: 1e-8
+
+## Requirements
+
+- Ubuntu Linux
+- G++ compiler
+- C++17
+
+## Build Instructions
+
+From the project root:
+
+g++ -O2 -std=c++17 -Wall -Wextra -pedantic \
+src/sequential/main.cpp -o cg_solver
+
+## Run Instructions
+
+./cg_solver 128
+
+./cg_solver 256
+
+./cg_solver 512
+
+## Correctness Validation
+
+The solver is tested using:
+
+u(x,y) = sin(pi*x) sin(pi*y)
+
+Validation metrics:
+- Relative residual
+- Relative error
+- Convergence status
+
+## Benchmarking
+
+Run:
+
+chmod +x benchmarks/benchmark.sh
+
+./benchmarks/benchmark.sh
+
+Analyze:
+
+python3 benchmarks/analyze.py
+
+## Results
+
+Results are stored in:
+
+results/baseline_results.csv
+
+The sequential performance graph is stored in:
+
+results/sequential_performance.png
+
+## Future Implementations
+
 - OpenMP
-- MPI
+- MPI 1D and 2D
+- Hybrid MPI + OpenMP
 - CUDA
-- Google Colab
-- Git and GitHub
-
-## Performance Evaluation
-
-We evaluate:
-- Execution time
-- Speedup
-- Parallel efficiency
-- Strong scaling
-- Weak scaling
-- Numerical correctness
-
-## Academic Information
-
-Course: Parallel and Distributed Computing  
-Course Code: CS426  
-Instructor: Sir Ahmad Nawaz  
-Department: National Cyber Security Academy  
-University: Air University, Islamabad
-
-## Project Status
-
-Phase-0: Scope definition and repository setup.
